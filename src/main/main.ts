@@ -5,6 +5,12 @@ import * as path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { BrowserWindow, app, ipcMain } from 'electron';
 import * as nodeEnv from '_utils/node-env';
+import { autoUpdater } from "electron-updater";
+import log from 'electron-log';
+log.transports.file.resolvePath = () => path.join('/home/sir/development/electron-autoupdate', 'logs/main.log');
+
+log.info('Hello, log');
+log.warn('Some problem appears');
 
 let mainWindow: Electron.BrowserWindow | undefined;
 
@@ -40,8 +46,26 @@ app.whenReady().then(() => {
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows.length === 0) createWindow();
+    autoUpdater.checkForUpdatesAndNotify();
   });
 }).finally(() => { /* no action */ });
+
+autoUpdater.on('update-available', () => {
+log.info('update-available');
+})
+
+autoUpdater.on('checking-for-update', () => {
+log.info('checking-for-update');
+})
+
+autoUpdater.on('download-progress', () => {
+log.info('download-progress');
+})
+
+
+autoUpdater.on('update-downloaded', () => {
+log.info('update-downloaded');
+})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
