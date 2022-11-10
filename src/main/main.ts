@@ -47,9 +47,10 @@ app.whenReady().then(() => {
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows.length === 0) createWindow();
-    autoUpdater.checkForUpdatesAndNotify();
   });
 }).finally(() => { /* no action */ });
+
+ app.on('ready', () => { autoUpdater.checkForUpdatesAndNotify() })
 
 autoUpdater.on('error',(error, message) => {
 log.info("error: " + error);
