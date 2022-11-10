@@ -51,6 +51,11 @@ app.whenReady().then(() => {
   });
 }).finally(() => { /* no action */ });
 
+autoUpdater.on('error',(error, message) => {
+log.info("error: " + error);
+log.info("message: " + message);
+
+})
 autoUpdater.on('update-available', () => {
 log.info('update-available');
 })
