@@ -8,6 +8,7 @@ function App(): JSX.Element {
   return (
     <div className="app">
       <h4>Welcome to React, Electron and TypeScript</h4>
+      <h4>Updated version</h4>
       <p>Hello</p>
     </div>
   );

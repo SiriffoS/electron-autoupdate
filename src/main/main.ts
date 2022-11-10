@@ -11,6 +11,7 @@ log.transports.file.resolvePath = () => path.join('/home/sir/development/electro
 
 log.info('Hello, log');
 log.warn('Some problem appears');
+log.info("Application version " + app.getVersion());
 
 let mainWindow: Electron.BrowserWindow | undefined;
 
@@ -60,6 +61,11 @@ log.info('checking-for-update');
 
 autoUpdater.on('download-progress', () => {
 log.info('download-progress');
+})
+
+autoUpdater.on('download-progress', (progress)=> {
+log.info('download-progress')
+log.info(progress);
 })
 
 
