@@ -1,6 +1,6 @@
 {
   "name": "electron-autoupdate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "This is how you update the electron app",
   "main": "./dist/main.bundle.js",
   "scripts": {
@@ -56,13 +56,13 @@
   "author": "Siriffo Sonko",
   "license": "MIT",
   "dependencies": {
-    "electron-builder": "^23.6.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "electron-builder": "^23.6.0",
     "@types/jest": "^29.1.2",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
