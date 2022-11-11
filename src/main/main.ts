@@ -3,7 +3,7 @@
  */
 import * as path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { BrowserWindow, app, ipcMain } from 'electron';
+import { BrowserWindow, app, ipcMain, dialog } from 'electron';
 import * as nodeEnv from '_utils/node-env';
 import { autoUpdater } from "electron-updater";
 import log from 'electron-log';
@@ -44,13 +44,21 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   if (nodeEnv.dev || nodeEnv.prod) createWindow();
+  console.log("1");
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows.length === 0) createWindow();
+    if (BrowserWindow.getAllWindows.length === 0) {
+    createWindow();
+  }
   });
-}).finally(() => { /* no action */ });
+}).finally(() => {
+mainWindow?.webContents.openDevTools()
+  
+  /* no action */ });
 
- app.on('ready', () => { autoUpdater.checkForUpdatesAndNotify() })
+ app.on('ready', () => { 
+  autoUpdater.checkForUpdatesAndNotify()
+})
 
 autoUpdater.on('error',(error, message) => {
 log.info("error: " + error);
@@ -77,6 +85,19 @@ log.info(progress);
 
 autoUpdater.on('update-downloaded', () => {
 log.info('update-downloaded');
+
+    const dialogOpts = {
+      type: "info",
+      buttons: ["Restart", "Later"],
+      title: "Application Update",
+      message:  "releaseName",
+      detail:
+        "A new version has been downloaded. Restart the application to apply the updates."
+    };
+    dialog.showMessageBox(dialogOpts).then((returnValue) => {
+      console.log(returnValue);
+      if (returnValue.response === 0) autoUpdater.quitAndInstall();
+    });
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -90,6 +111,8 @@ ipcMain.on('renderer-ready', () => {
   // eslint-disable-next-line no-console
   console.log('Renderer is ready.');
 });
+
+
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
