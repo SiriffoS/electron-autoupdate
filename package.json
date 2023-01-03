@@ -1,6 +1,6 @@
 {
   "name": "electron-autoupdate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "This is how you update the electron app",
   "main": "./dist/main.bundle.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "next-major": "npm --no-git-tag-version version major",
     "build:win": "electron-builder build --win",
     "package:win": "electron-builder build --win -p always",
-    "build:mac": "electron-builder build --mac"
+    "build:mac": "electron-builder build --mac -p always"
   },
   "build": {
     "appId": "com.test.id",
