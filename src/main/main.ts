@@ -8,6 +8,7 @@ import * as nodeEnv from '_utils/node-env';
 import { autoUpdater } from "electron-updater";
 import log from 'electron-log';
 log.transports.file.resolvePath = () => path.join('/home/sir/development/electron-autoupdate', 'logs/main.log');
+console.log("tjeanre");
 
 log.info('Hello, log');
 log.warn('Some problem appears');

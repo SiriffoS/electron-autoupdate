@@ -1,6 +1,6 @@
 {
   "name": "electron-autoupdate",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "This is how you update the electron app",
   "main": "./dist/main.bundle.js",
   "scripts": {
